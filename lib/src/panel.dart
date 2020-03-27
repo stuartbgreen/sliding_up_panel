@@ -30,12 +30,12 @@ class SlidingUpPanel extends StatefulWidget {
   final Widget panel;
 
   /// WARNING: This feature is still in beta and is subject to change without
-  /// notice. Stability is not gauranteed. Provides a [ScrollController] and
+  /// notice. Stability is not gauranteed. Provides a [FixedExtentScrollController] and
   /// [ScrollPhysics] to attach to a scrollable object in the panel that links
   /// the panel position with the scroll position. Useful for implementing an
   /// infinite scroll behavior. If [panel] and [panelBuilder] are both non-null,
   /// [panel] will be used.
-  final Widget Function(ScrollController sc) panelBuilder;
+  final Widget Function(FixedExtentScrollController sc) panelBuilder;
 
   /// The Widget displayed overtop the [panel] when collapsed.
   /// This fades out as the panel is opened.
@@ -187,7 +187,7 @@ class _SlidingUpPanelState extends State<SlidingUpPanel> with SingleTickerProvid
 
   AnimationController _ac;
 
-  ScrollController _sc;
+  FixedExtentScrollController _sc;
   bool _scrollingEnabled = false;
   VelocityTracker _vt = new VelocityTracker();
 
@@ -211,7 +211,7 @@ class _SlidingUpPanelState extends State<SlidingUpPanel> with SingleTickerProvid
       if(widget.onPanelClosed != null && _ac.value == 0.0) widget.onPanelClosed();
     });
 
-    _sc = new ScrollController();
+    _sc = new FixedExtentScrollController();
 
     // prevent the panel content from being scrolled only if the widget is
     // draggable and panel scrolling is enabled
